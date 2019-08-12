@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NbCalendarRangeComponent, NbButtonComponent, NbCardComponent, NbCardHeaderComponent, NbCardBodyComponent, NbSelectComponent } from '@nebular/theme';
+import { ParamsService } from 'src/app/core/params.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -7,7 +9,9 @@ import { NbCalendarRangeComponent, NbButtonComponent, NbCardComponent, NbCardHea
 })
 export class CalendarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private paramsService : ParamsService) {
+    this.paramsService.isFrameSource.next(true);
+  }
   today = new Date();
   range;
   disabled = true;
@@ -61,5 +65,15 @@ export class CalendarComponent implements OnInit {
     return dates;
   };
 
+  submit(){
+    let reservation = {
+      range : this.range,
+      nb : this.vacanciers
+
+    }
+    this.paramsService.saveReservationDetails(reservation);
+
+    window.open(`${environment.homeUrl}`, '_blank'); 
+  }
 
 }

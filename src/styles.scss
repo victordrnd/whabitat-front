@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+@font-face {
+  font-family: "GoogleBold";
+  src: url("assets/fonts/ProductSans-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Open Sans;
+  src: url("assets/fonts/ProductSans-Regular.woff") format("woff");
+}
+html{
+    overflow-x:hidden;
+    body{
+        font-family: Open Sans 
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-family: "GoogleBold"
+    }
+    .text-bold {
+        font-family: "GoogleBold"
+    }
+    .text-normal{
+        font-family: Open Sans 
+    }
+    .vertical-centered{
+        position: absolute;
+        top:50%;
+        transform: translateY(calc(-50% ));
+    }
+}
+
+
+
+

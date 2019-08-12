@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col">
+        <div class="card shadow border-0 p-4">
+            <h5>Vous possédez déjà un compte ?</h5>
+            <div class="row mt-3">
+                <div class="col-md-8 d-block mx-auto">
+                    <form [formGroup]="form">
+                        <label>Adresse email</label>
+                        <input type="email" formControlName="email" class="form-control" placeholder="Adresse email">
+                        <p class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">L'adresse email saisis est invalide</p>
+                        <label class="mt-4">Mot de passe</label>
+                        <input type="password" formControlName="password" placeholder="Mot de passe"
+                            class="form-control">
+                        <p class="text-danger" *ngIf="password.touched && password.invalid">Le mot de passe est requis</p>
+                        <button class="btn btn-primary rounded-0 float-right mt-4" [disabled]="!form.valid"
+                            (click)="attemptAuth()">Se connecter</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="mx-5" />
+            <h5>Créer un compte</h5>
+            <div class="row mt-3">
+                <div class="col-md-8 d-block mx-auto">
+                    <button class="btn btn-dark rounded-0 d-block mx-auto">Créer mon compte <i
+                            class="feather icon-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

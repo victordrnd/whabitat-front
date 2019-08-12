@@ -7,15 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbButtonModule, NbCardModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { SharedModule } from './shared/shared.module';
-import { ReservationComponent } from './reservation/reservation.component';
-
-
+import { PagesModule } from './pages/pages.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    ReservationComponent
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -23,8 +23,13 @@ import { ReservationComponent } from './reservation/reservation.component';
     NbLayoutModule,
     NbEvaIconsModule,
     SharedModule,
+    PagesModule,
     NbButtonModule,
-    NbCardModule
+    NbCardModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

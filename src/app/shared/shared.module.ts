@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { NbLayoutModule, NbCalendarRangeModule, NbButtonModule, NbCardModule, NbSelectModule } from '@nebular/theme';
+import { NavigationComponent } from './components/navigation/navigation.component';
 @NgModule({
-  declarations: [CalendarComponent],
+  declarations: [CalendarComponent, NavigationComponent],
   imports: [
     CommonModule,
     NbCalendarRangeModule,
@@ -11,6 +12,9 @@ import { NbLayoutModule, NbCalendarRangeModule, NbButtonModule, NbCardModule, Nb
     NbButtonModule,
     NbCardModule,
     NbSelectModule
+  ],
+  exports: [
+    NavigationComponent
   ]
 })
 export class SharedModule { }

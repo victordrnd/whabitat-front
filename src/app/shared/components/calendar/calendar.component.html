@@ -21,7 +21,7 @@
                         </nb-select>
                     </div>
                     <div class="col mt-3">
-                        <button class="float-right" nbButton [disabled]="disabled" *ngIf="vacanciers.length > 0">Réserver</button>
+                        <button class="float-right" nbButton [disabled]="disabled" *ngIf="vacanciers.length > 0" (click)="submit()">Réserver</button>
                     </div>
                 </div>
                 <!-- <button nbButton disabled>Disabled</button> -->
