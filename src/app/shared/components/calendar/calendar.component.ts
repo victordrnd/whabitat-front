@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input, Output } from '@angular/core';
 import { NbCalendarRangeComponent, NbButtonComponent, NbCardComponent, NbCardHeaderComponent, NbCardBodyComponent, NbSelectComponent } from '@nebular/theme';
 import { ParamsService } from 'src/app/core/params.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -9,14 +11,18 @@ import { environment } from 'src/environments/environment';
 })
 export class CalendarComponent implements OnInit {
 
-  constructor(private paramsService : ParamsService) {
-    this.paramsService.isFrameSource.next(true);
+  constructor(
+    private router : Router,
+    private paramsService : ParamsService) {
+    
   }
+  @Input() embbeded = false;
   today = new Date();
   range;
   disabled = true;
   disabledDates = [];
-  vacanciers = 0;
+  @Input() vacanciers = 0;
+  @Output() close : EventEmitter<string> = new EventEmitter<string>(); 
 
   filter = (date) => {
     for (let i = 1; i < this.disabledDates.length; i++) { 
@@ -28,6 +34,11 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.vacanciers == 0){
+      this.paramsService.isFrameSource.next(true);
+    }else{
+      this.paramsService.isFrameSource.next(false);
+    }
   }
 
 
@@ -72,8 +83,11 @@ export class CalendarComponent implements OnInit {
 
     }
     this.paramsService.saveReservationDetails(reservation);
-
-    window.open(`${environment.homeUrl}`, '_blank'); 
+    if(this.embbeded){
+      this.close.emit('close');
+    }else{
+      window.open(`${environment.homeUrl}`, '_blank'); 
+    }
   }
 
 }

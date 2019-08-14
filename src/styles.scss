@@ -2,7 +2,7 @@
 @import '~ngx-toastr/toastr';
 @font-face {
   font-family: "GoogleBold";
-  src: url("assets/fonts/ProductSans-Bold.woff") format("woff");
+  src: url("assets/fonts/ProductSans-Medium.woff") format("woff");
 }
 
 @font-face {
@@ -15,7 +15,8 @@ html{
         font-family: Open Sans 
     }
     h1,h2,h3,h4,h5,h6{
-        font-family: "GoogleBold"
+        font-family: "GoogleBold" !important;
+        font-weight: inherit !important;
     }
     .text-bold {
         font-family: "GoogleBold"
@@ -23,10 +24,33 @@ html{
     .text-normal{
         font-family: Open Sans 
     }
+    .text-small{
+        font-size:14px;
+    }
+    .pointer{
+        cursor:pointer;
+    }
     .vertical-centered{
         position: absolute;
         top:50%;
         transform: translateY(calc(-50% ));
+    }
+    .titleunderline {
+        display: inline-block;
+        width: 70px;
+        height: 4px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border-radius: 20px;
+        background-color: #36f;
+    }
+    .btn-primary{
+        background:#36f !important;
+        border-color:#36f!important;
+    }
+    
+    .text-primary{
+        color:#36f !important;
     }
 }
 

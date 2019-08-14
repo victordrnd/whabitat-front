@@ -6,13 +6,18 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { PaymentsComponent } from './payments/payments.component';
 @NgModule({
-  declarations: [LoginComponent, ReservationSummaryComponent, ReservationComponent, SignupComponent],
+  declarations: [LoginComponent, ReservationSummaryComponent, ReservationComponent, SignupComponent, PaymentsComponent],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ]
 })
 export class PagesModule { }

@@ -3,17 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { CalendarComponent } from './shared/components/calendar/calendar.component';
 import { ReservationComponent } from './pages/reservation/reservation.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { PaymentsComponent } from './pages/payments/payments.component';
 
 
 const routes: Routes = [
   {
     path:'',
-    children : [
-      {
-        path: '',
-        component : ReservationComponent
-      }
-    ]
+    component : ReservationComponent
+  },
+  {
+    path:'payments',
+    component : PaymentsComponent
   },
   {
     path: 'signup',

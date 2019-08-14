@@ -1,0 +1,31 @@
+<div class="vertical-centered w-100">
+    <form>
+
+        <div class="row mx-md-5">
+            <div class="col-12 col-md-8">
+                <div class="card shadow border-0 mx-5">
+                    <div class="row px-5 pt-5">
+                        <div class="col">
+                            <h4>Paiement sécurisé</h4>
+                            <div class="card rounded-0 p-4">
+                                <p class="mx-3">Saisissez vos identifiants bancaire :</p>
+                                <div class="shadow rounded-0 m-3 p-2">
+                                    <div id="stripe-card" class="p-2" style="height:36px"></div>
+                                </div>
+
+                                <p class="text-small ml-3"><i class="feather icon-lock"></i> Vos détails de paiement
+                                    sont
+                                    stockés en sécurité auprès de notre partenaire de paiement, en utilisant un cryptage
+                                    de qualité bancaire.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary rounded-0 text-bold py-3 mt-5" [disabled]="disabled" (click)="payOrder()">Confirmer & payer</button>
+                </div>
+            </div>
+            <div class="col-12 col-md">
+                <app-reservation-summary [payment]="true"></app-reservation-summary>
+            </div>
+        </div>
+    </form>
+</div>

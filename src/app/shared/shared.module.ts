@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { NbLayoutModule, NbCalendarRangeModule, NbButtonModule, NbCardModule, NbSelectModule } from '@nebular/theme';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [CalendarComponent, NavigationComponent],
   imports: [
     CommonModule,
+    RouterModule,
     NbCalendarRangeModule,
     NbLayoutModule,
     NbButtonModule,
@@ -14,7 +16,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     NbSelectModule
   ],
   exports: [
-    NavigationComponent
+    NavigationComponent,
+    CalendarComponent
   ]
 })
 export class SharedModule { }

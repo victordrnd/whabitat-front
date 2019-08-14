@@ -1,1 +1,15 @@
-<p>reservation-summary works!</p>
+<app-calendar *ngIf="showCalendar" [embbeded]="true" [vacanciers]="reservation.nb" (close)="showCalendar = !showCalendar;getReservationDetails()"></app-calendar>
+<div class="card border-0 p-4 shadow" *ngIf="!showCalendar">
+    <h5 class="mb-0">Détails de votre réservation</h5>
+    <div class="titleunderline"></div>
+    <div class="mt-4">
+        <p><i class="feather icon-calendar"></i> Date d'arrivée :</p>
+        <p class="text-right"> {{reservation.range.start | date}}</p>
+        <p><i class="feather icon-calendar"></i> Date de départ :</p>
+        <p class="text-right"> {{reservation.range.end | date}}</p>
+        <p><i class="feather icon-briefcase"></i> Nombre de vacanciers :</p>
+        <p class="text-right"> {{reservation.nb}} personnes</p>
+    </div>
+    <button class="btn btn-primary rounded-0 mt-4" (click)="showCalendar = !showCalendar" *ngIf="!payment">Modifier la réservation</button>
+
+</div>

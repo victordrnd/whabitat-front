@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ReservationService } from 'src/app/core/reservation.service';
 
 @Component({
   selector: 'app-reservation-summary',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationSummaryComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private reservationService : ReservationService) { }
+  showCalendar=false;
+  @Input() payment = false;
+  reservation
   ngOnInit() {
+    this.getReservationDetails();
   }
 
+  getReservationDetails(){
+    this.reservation = JSON.parse(this.reservationService.getCurrentReservationDetails());
+
+  }
 }
