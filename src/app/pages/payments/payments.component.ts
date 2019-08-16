@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentService } from 'src/app/core/payment.service';
+import { ReservationService } from 'src/app/core/reservation.service';
 
 @Component({
   selector: 'app-payments',
@@ -9,10 +11,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PaymentsComponent implements OnInit {
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService,
+  private paymentService : PaymentService,
+  private reservationService : ReservationService) { }
   stripe;
+  intent;
   cardElement;
   disabled = true;
+  reservation;
   ngOnInit() {
     this.stripe = Stripe(environment.stripePublishableKey);
     const elements = this.stripe.elements();
@@ -31,22 +37,27 @@ export class PaymentsComponent implements OnInit {
         iconColor: '#fa755a'
       }
     };
-    this.cardElement = elements.create('card', { style: style });
-    this.cardElement.mount('#stripe-card');
-    this.cardElement.addEventListener('change', (res) => {
-      this.disabled = res.complete ? false : true;
-    })
+    //Create payment intent
+    this.reservation = JSON.parse(this.reservationService.getCurrentReservationDetails());
+    this.paymentService.createPaymentIntent(this.reservation).toPromise().then((intent) => {
+      this.intent = intent
+      this.cardElement = elements.create('card', { style: style });
+      this.cardElement.mount('#stripe-card');
+      this.cardElement.addEventListener('change', (res) => {
+        this.disabled = res.complete ? false : true;
+      });
+    });
+
   }
 
 
-  payOrder() {
-    this.stripe.createToken(this.cardElement).then(resp => {
-      console.log(resp);
-      if (resp.error) {
-        console.error(resp.error);
-      } else {
-      }
+  async payOrder() {
+    const {paymentIntent, error} = await this.stripe.handleCardPayment(this.intent.client_secret, this.cardElement, {
 
-    })
+    });
+    if(!error){
+      this.reservationService.confirmReservation(this.reservation).toPromise();
+      localStorage.removeItem('reservationDetail');
+    }
   }
 }

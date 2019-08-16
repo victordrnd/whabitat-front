@@ -4,12 +4,16 @@
     <div class="titleunderline"></div>
     <div class="mt-4">
         <p><i class="feather icon-calendar"></i> Date d'arrivée :</p>
-        <p class="text-right"> {{reservation.range.start | date}}</p>
+        <p class="text-right"> {{reservation?.range.start | date}}</p>
         <p><i class="feather icon-calendar"></i> Date de départ :</p>
-        <p class="text-right"> {{reservation.range.end | date}}</p>
+        <p class="text-right"> {{reservation?.range.end | date}}</p>
         <p><i class="feather icon-briefcase"></i> Nombre de vacanciers :</p>
-        <p class="text-right"> {{reservation.nb}} personnes</p>
+        <p class="text-right"> {{reservation?.nb}} personnes</p>
     </div>
     <button class="btn btn-primary rounded-0 mt-4" (click)="showCalendar = !showCalendar" *ngIf="!payment">Modifier la réservation</button>
-
+    <div *ngIf="price">
+        <hr/>
+        <p class="text-bold">Total : <span class="float-right">{{(price / 100)}} €</span> </p>
+        
+    </div>
 </div>

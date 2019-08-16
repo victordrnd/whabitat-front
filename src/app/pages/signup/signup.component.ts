@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,8 +10,10 @@ import { UserService } from 'src/app/core/user.service';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder,
-    private userService : UserService) { }
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -20,7 +23,7 @@ export class SignupComponent implements OnInit {
       phone: ['+33', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password2: ['', Validators.required],
-      country : ['', Validators.required]
+      country: ['', Validators.required]
     }, { validator: this.passwordCheck });
   }
 
@@ -32,8 +35,9 @@ export class SignupComponent implements OnInit {
     return pass1 === pass2 ? null : { notSame: true };
   }
 
-  attemptSignup(){
+  attemptSignup() {
     this.userService.signUp(this.form.value).toPromise().then(user => this.userService.setAuth(user));
+    this.router.navigate(['/payments']);
   }
   countries = [
     { code: 'AF', value: 'Afghanistan' },
@@ -286,13 +290,13 @@ export class SignupComponent implements OnInit {
   get password() {
     return this.form.get('password');
   }
-  get password2(){
+  get password2() {
     return this.form.get('password2');
   }
-  get email(){
+  get email() {
     return this.form.get('email')
   }
-  get firstname(){return this.form.get('firstname')}
-  get lastname(){return this.form.get('lastname')}
-  get phone(){return this.form.get('phone')}
+  get firstname() { return this.form.get('firstname') }
+  get lastname() { return this.form.get('lastname') }
+  get phone() { return this.form.get('phone') }
 }

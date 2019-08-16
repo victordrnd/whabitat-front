@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ReservationService } from 'src/app/core/reservation.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
     private router : Router,
     private fb : FormBuilder,
     private userService : UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private reservationService : ReservationService
     ) { }
 
   ngOnInit() {
@@ -32,7 +34,9 @@ export class LoginComponent implements OnInit {
     }
     this.userService.attemptAuth(crendentials).subscribe(result =>{
       this.userService.setAuth(result);
-      this.router.navigate(['payments']);
+      if(this.reservationService.getCurrentReservationDetails()){
+        this.router.navigate(['payments']);
+      }
     },
     err => {
       this.toastr.error('Les identifiants saisis sont invalides', 'Identifiants invalides', {

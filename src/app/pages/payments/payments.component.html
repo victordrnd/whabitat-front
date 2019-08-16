@@ -20,11 +20,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary rounded-0 text-bold py-3 mt-5" [disabled]="disabled" (click)="payOrder()">Confirmer & payer</button>
+                    <button class="btn btn-primary rounded-0 text-bold py-3 mt-5" [attr.data-secret]="intent?.client_secret" [disabled]="disabled" (click)="payOrder()">Confirmer & payer</button>
                 </div>
             </div>
             <div class="col-12 col-md">
-                <app-reservation-summary [payment]="true"></app-reservation-summary>
+                <app-reservation-summary *ngIf="intent" [payment]="true" [price]="intent?.amount"></app-reservation-summary>
             </div>
         </div>
     </form>

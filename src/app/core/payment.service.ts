@@ -6,19 +6,13 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ReservationService {
-
-
-
+export class PaymentService {
 
   constructor(private http : HttpClient) { }
 
-  getCurrentReservationDetails(){
-    return localStorage.getItem('reservationDetail');
-  }
 
-  confirmReservation(reservation){
-    return this.http.post(`${environment.ApiUrl}/payments/confirm`, {reservation})
+  createPaymentIntent(currentReservation){
+    return this.http.post(`${environment.ApiUrl}/payments/intent`, {reservation : currentReservation})
       .pipe(map((res:any) => res.result));
   }
 }
