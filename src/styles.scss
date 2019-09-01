@@ -31,9 +31,7 @@ html{
         cursor:pointer;
     }
     .vertical-centered{
-        position: absolute;
-        top:50%;
-        transform: translateY(calc(-50% ));
+       margin-top:1.6em;
     }
     .titleunderline {
         display: inline-block;

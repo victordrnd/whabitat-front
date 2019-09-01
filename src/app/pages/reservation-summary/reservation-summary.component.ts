@@ -20,8 +20,8 @@ export class ReservationSummaryComponent implements OnInit {
 
   getReservationDetails(){
     this.reservation = JSON.parse(this.reservationService.getCurrentReservationDetails());
-    if(!this.reservation){
-      window.location.href ='https://whabitat.fr';
-    }
+    // if(!this.reservation){
+    //   window.location.href ='https://whabitat.fr';
+    // }
   }
 }

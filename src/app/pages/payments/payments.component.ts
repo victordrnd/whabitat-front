@@ -12,13 +12,15 @@ import { ReservationService } from 'src/app/core/reservation.service';
 export class PaymentsComponent implements OnInit {
 
   constructor(private toastr: ToastrService,
-  private paymentService : PaymentService,
-  private reservationService : ReservationService) { }
+    private paymentService: PaymentService,
+    private reservationService: ReservationService) { }
   stripe;
   intent;
   cardElement;
   disabled = true;
   reservation;
+
+
   ngOnInit() {
     this.stripe = Stripe(environment.stripePublishableKey);
     const elements = this.stripe.elements();
@@ -52,11 +54,15 @@ export class PaymentsComponent implements OnInit {
 
 
   async payOrder() {
-    const {paymentIntent, error} = await this.stripe.handleCardPayment(this.intent.client_secret, this.cardElement, {
+    const { paymentIntent, error } = await this.stripe.handleCardPayment(this.intent.client_secret, this.cardElement, {
 
     });
-    if(!error){
-      this.reservationService.confirmReservation(this.reservation).toPromise();
+    if (!error) {
+      let obj = {
+        reservation : this.reservation,
+        intent : this.intent
+      };
+      this.reservationService.confirmReservation(obj).toPromise();
       localStorage.removeItem('reservationDetail');
     }
   }

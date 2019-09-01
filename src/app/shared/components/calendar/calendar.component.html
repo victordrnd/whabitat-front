@@ -1,12 +1,24 @@
-<div class="">
+<div class="m-2">
     <div class="pr-0">
-        <nb-calendar-range [(range)]="range" [min]="today" [filter]="filter" [size]="'large'" (rangeChange)="change()">
+        <ngx-spinner 
+        bdOpacity = 1
+        bdColor = "#ffffff"
+        size = "default"
+        color = "#2867ff"
+        type = "ball-running-dots"
+        [fullScreen] = "false"
+         *ngIf="loading">
+            <p>Récupération des disponibilités...</p>
+        </ngx-spinner>
+        <nb-calendar-range [(range)]="range" [min]="today" [max]="max" [filter]="filter" [size]="'large'"
+            [boundingMonth]="false" (rangeChange)="change()" *ngIf="!loading">
         </nb-calendar-range>
         <nb-card>
             <nb-card-body class="example-items-rows w-100">
                 <div class="row">
                     <div class="col-12">
-                        <nb-select placeholder="Nombre de vacanciers" fullWidth="true" size="small" [(selected)]="vacanciers">
+                        <nb-select placeholder="Nombre de vacanciers" fullWidth="true" size="small"
+                            [(selected)]="vacanciers">
                             <nb-option value="1">1 personnes</nb-option>
                             <nb-option value="2">2 personnes</nb-option>
                             <nb-option value="3">3 personnes</nb-option>
@@ -16,15 +28,16 @@
                             <nb-option value="7">7 personnes</nb-option>
                             <nb-option value="8">8 personnes</nb-option>
                             <nb-option value="9">9 personnes</nb-option>
-                            <nb-option value="10">10 personnes</nb-option> 
+                            <nb-option value="10">10 personnes</nb-option>
                             <nb-option value="11">11 personnes</nb-option>
                         </nb-select>
                     </div>
                     <div class="col mt-3">
-                        <button class="float-right" nbButton [disabled]="disabled" *ngIf="vacanciers.length > 0" (click)="submit()">Réserver</button>
+                        <button class="float-right" nbButton [disabled]="disabled" *ngIf="vacanciers.length > 0"
+                            (click)="submit()">Réserver</button>
                     </div>
                 </div>
-                <!-- <button nbButton disabled>Disabled</button> -->
+                <p class="text-danger">{{error}}</p>
             </nb-card-body>
         </nb-card>
     </div>

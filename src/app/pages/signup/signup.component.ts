@@ -35,8 +35,11 @@ export class SignupComponent implements OnInit {
     return pass1 === pass2 ? null : { notSame: true };
   }
 
-  attemptSignup() {
-    this.userService.signUp(this.form.value).toPromise().then(user => this.userService.setAuth(user));
+  async attemptSignup() {
+    await this.userService.signUp(this.form.value).toPromise().then((user)=> {
+      localStorage.setItem('token', user.token);
+      this.userService.setAuth(user)
+    });
     this.router.navigate(['/payments']);
   }
   countries = [

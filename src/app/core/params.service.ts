@@ -11,7 +11,7 @@ export class ParamsService {
   public isFrame = this.isFrameSource.asObservable();
 
 
-  saveReservationDetails(reservation){
-    localStorage.setItem('reservationDetail', JSON.stringify(reservation));
-  }
+  
+
+
 }

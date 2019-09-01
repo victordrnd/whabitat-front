@@ -62,6 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "sslKey": "./certificats/localhost.key.pem",
+            "sslCert": "./certificats/localhost.crt",
             "browserTarget": "bruw:build"
           },
           "configurations": {
