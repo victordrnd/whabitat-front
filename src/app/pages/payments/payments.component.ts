@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/core/payment.service';
 import { ReservationService } from 'src/app/core/reservation.service';
-
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -13,7 +13,8 @@ export class PaymentsComponent implements OnInit {
 
   constructor(private toastr: ToastrService,
     private paymentService: PaymentService,
-    private reservationService: ReservationService) { }
+    private reservationService: ReservationService,
+    private router: Router) { }
   stripe;
   intent;
   cardElement;
@@ -59,11 +60,12 @@ export class PaymentsComponent implements OnInit {
     });
     if (!error) {
       let obj = {
-        reservation : this.reservation,
-        intent : this.intent
+        reservation: this.reservation,
+        intent: this.intent
       };
-      this.reservationService.confirmReservation(obj).toPromise();
+      await this.reservationService.confirmReservation(obj).toPromise();
       localStorage.removeItem('reservationDetail');
+      this.router.navigate(['/payments/success']);
     }
   }
 }

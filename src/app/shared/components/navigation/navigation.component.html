@@ -12,7 +12,7 @@
             <li class="list-inline-item mr-4">Photo</li>
             <li class="list-inline-item mr-4">Contact</li>
             <li class="list-inline-item mr-4">Avis</li>
-            <li class="list-inline-item mr-4"><i class="feather icon-user"></i></li>            
+            <li class="list-inline-item mr-4" *ngIf="user"><button [nbContextMenu]="items" class="btn"><i class="feather icon-user"></i></button></li>            
         </ul>
     </div>
 </div>

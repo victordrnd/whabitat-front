@@ -6,19 +6,18 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserService } from '../user.service';
 
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
-  constructor(private userService : UserService) {}
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headersConfig = {
       Accept: 'application/json'
     };
     
-    const token = this.userService.getToken();
+    const token = localStorage.getItem('token');
 
     if (token) {
       headersConfig['Authorization'] = `Bearer ${token}`;

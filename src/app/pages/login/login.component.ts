@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
       this.userService.setAuth(result);
       if(this.reservationService.getCurrentReservationDetails()){
         this.router.navigate(['payments']);
+      }else{
+        this.router.navigate(['dashboard']);
       }
     },
     err => {

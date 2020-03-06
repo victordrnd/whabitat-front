@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { NbLayoutModule, NbCalendarRangeModule, NbButtonModule, NbCardModule, NbSelectModule } from '@nebular/theme';
+import { NbLayoutModule, NbCalendarRangeModule, NbButtonModule, NbCardModule, NbSelectModule, NbContextMenuModule } from '@nebular/theme';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [CalendarComponent, NavigationComponent],
   imports: [
@@ -15,7 +16,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NbButtonModule,
     NbCardModule,
     NbSelectModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NbContextMenuModule
   ],
   exports: [
     NavigationComponent,

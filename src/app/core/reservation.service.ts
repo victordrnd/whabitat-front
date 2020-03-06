@@ -31,13 +31,27 @@ export class ReservationService {
     if(hash == new Md5().appendStr(reservation + 'customSalt').end(false).toString()){
       return reservation;
     }else{
-      localStorage.clear();
-      window.location.href = 'https://whabitat.fr';
+      //localStorage.localStorage.clear();
+      //window.location.href = 'https://whabitat.fr';
     }
   }
 
   confirmReservation(obj){
     return this.http.post(`${environment.ApiUrl}/payments/confirm`, obj)
+      .pipe(map((res:any) => res.result));
+  }
+
+
+
+
+
+  getMyLastReservation(){
+    return this.http.get(`${environment.ApiUrl}/reservations/my/last`)
+      .pipe(map((res:any) => res.result));
+  }
+
+  getMyReservations(){
+    return this.http.get(`${environment.ApiUrl}/reservations/my/all`)
       .pipe(map((res:any) => res.result));
   }
 }

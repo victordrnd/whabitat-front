@@ -1,0 +1,35 @@
+<div class="row mt-5 px-5">
+    <div class="col-2 mt-5">
+        <nb-card>
+            <nb-menu [items]="items">
+            </nb-menu>
+        </nb-card>
+    </div>
+
+    <div class="col px-5 mt-5">
+        <h4>Mes réservations</h4>
+        <table class="table px-5">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date d'arrivé</th>
+                <th scope="col">Date de départ</th>
+                <th scope="col">Nombre de vacanciers</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let reservation of reservations; let i = index">
+                <th scope="row">{{i}}</th>
+                <td>{{reservation.arrival_date | date}}</td>
+                <td>{{reservation.departure_date | date}}</td>
+                <td>{{reservation.vacanciers}}</td>
+                <td>{{reservation.status}}</td>
+                <td><i (click)="openRefundModal(reservation.id)" *ngIf="getJsDate(reservation.arrival_date) > maxRefundDate " class="feather icon-sliders pointer text-primary"></i></td>
+
+            </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

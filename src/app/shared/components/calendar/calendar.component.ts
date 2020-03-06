@@ -44,7 +44,7 @@ export class CalendarComponent implements OnInit {
     }else{
       this.paramsService.isFrameSource.next(false);
     }
-    this.max.setMonth(this.today.getMonth() +6)
+    this.max.setMonth(this.today.getMonth() +12)
     console.log(this.max)
    this.getAvailabilities();
 

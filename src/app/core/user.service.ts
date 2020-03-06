@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +19,26 @@ export class UserService {
   private isAuthenticatedSubject = new BehaviorSubject<any>(false);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+      private router : Router) {
+    this.populate();
+   }
 
 
   async populate() {
     // If JWT detected, attempt to get & store user's info
     if (this.getToken()) {
       try {
-        let result
-        this.getCurrentUser().toPromise().then(res => result = res);
-        this.setAuth(result);
+        let result;
+        await this.getCurrentUser().toPromise().then(res => {
+          result = res;
+        });
+        this.currentUserSubject.next(result);
+        //this.setAuth(result);
         this.isAuthenticatedSubject.next(true);
         return true;
       } catch (error) {
+        console.log(error);
         this.purgeAuth();
         this.isAuthenticatedSubject.next(false);
         return false;
