@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import {HttpTokenInterceptor} from './core/interceptors/http.token.interceptor';
+import { HashLocationStrategy, LocationStrategy  } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,9 @@ import {HttpTokenInterceptor} from './core/interceptors/http.token.interceptor';
     CommonModule,
     ToastrModule.forRoot()
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    {provide : LocationStrategy , useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
