@@ -21,4 +21,4 @@ jobs:
         BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: dist/bruw
-        BUILD_SCRIPT: npm install && npm run build -- --prod && echo "whabitat.victordurand.fr" >> dist/bruw/CNAME
+        BUILD_SCRIPT: npm install && npm run build -- --prod && cp dist/index.html dist/404.html &&  echo "whabitat.victordurand.fr" >> dist/bruw/CNAME
