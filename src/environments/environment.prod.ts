@@ -3,9 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  ApiUrl : 'http://localhost:8000/api',
-  homeUrl :'http://localhost:4200',
+  production: true,
+  ApiUrl : 'https://whabitat-back.herokuapp.com/api',
+  homeUrl :'https://whabitat.victordurand.fr',
   stripePublishableKey :"pk_test_BOrV7rTZlRcTTyqhADAY0cSh00jJqXGlAY"
 };
 
