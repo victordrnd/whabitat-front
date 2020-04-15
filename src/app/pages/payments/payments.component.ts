@@ -55,9 +55,14 @@ export class PaymentsComponent implements OnInit {
 
 
   async payOrder() {
-    const { paymentIntent, error } = await this.stripe.handleCardPayment(this.intent.client_secret, this.cardElement, {
-
+    const {paymentIntent, error} = this.stripe.confirmCardSetup(this.intent.client_secret, {
+      payment_method : {
+        card : this.cardElement
+      }
     });
+    // const { paymentIntent, error } = await this.stripe.handleCardPayment(this.intent.client_secret, this.cardElement, {
+
+    // });
     if (!error) {
       let obj = {
         reservation: this.reservation,
