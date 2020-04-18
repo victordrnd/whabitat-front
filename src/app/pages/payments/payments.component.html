@@ -17,14 +17,15 @@
                                     sont
                                     stockés en sécurité auprès de notre partenaire de paiement, en utilisant un cryptage
                                     de qualité bancaire.</p>
-                            </div>
+                                    <a href="https://stripe.com" class="ml-auto" style="width:12%" target="_blank"><img src="../../../assets/stripe.svg" class="w-75"></a>
+                                </div>
                         </div>
                     </div>
                     <button class="btn btn-primary rounded-0 text-bold py-3 mt-5" [attr.data-secret]="intent?.client_secret" [disabled]="disabled" (click)="payOrder()">Confirmer & payer</button>
                 </div>
             </div>
             <div class="col-12 col-md">
-                <app-reservation-summary *ngIf="intent" [payment]="true" [price]="intent?.amount"></app-reservation-summary>
+                <app-reservation-summary *ngIf="price" [payment]="true" [price]="price"></app-reservation-summary>
             </div>
         </div>
     </form>

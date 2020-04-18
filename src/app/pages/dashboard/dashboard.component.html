@@ -24,7 +24,7 @@
                 <th scope="row">{{i}}</th>
                 <td>{{reservation.arrival_date | date}}</td>
                 <td>{{reservation.departure_date | date}}</td>
-                <td>{{reservation.vacanciers}}</td>
+                <td>{{reservation.adults*1 + reservation.children*1}}</td> 
                 <td>{{reservation.status}}</td>
                 <td><i (click)="openRefundModal(reservation.id)" *ngIf="getJsDate(reservation.arrival_date) > maxRefundDate " class="feather icon-sliders pointer text-primary"></i></td>
 

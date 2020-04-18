@@ -14,9 +14,9 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class CalendarComponent implements OnInit {
 
   constructor(
-    private router : Router,
-    private paramsService : ParamsService,
-    private reservationService : ReservationService,
+    private router: Router,
+    private paramsService: ParamsService,
+    private reservationService: ReservationService,
     private spinner: NgxSpinnerService) {
 
   }
@@ -25,13 +25,14 @@ export class CalendarComponent implements OnInit {
   max = new Date();
   range;
   disabled = true;
-  disabledResa =[];
+  disabledResa = [];
   disabledDates = [];
   loading = true;
   error;
-  
-  @Input() vacanciers = 0;
-  @Output() close : EventEmitter<string> = new EventEmitter<string>(); 
+
+  @Input() adults = 0;
+  @Input() children = 0;
+  @Output() close: EventEmitter<string> = new EventEmitter<string>();
 
   filter = (date) => {
     return this.isAvailableDate(date);
@@ -39,14 +40,14 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    if(this.vacanciers == 0){
+    if (this.adults == 0) {
       this.paramsService.isFrameSource.next(true);
-    }else{
+    } else {
       this.paramsService.isFrameSource.next(false);
     }
-    this.max.setMonth(this.today.getMonth() +12)
+    this.max.setMonth(this.today.getMonth() + 12)
     console.log(this.max)
-   this.getAvailabilities();
+    this.getAvailabilities();
 
   }
 
@@ -55,19 +56,19 @@ export class CalendarComponent implements OnInit {
     this.error = "";
     if (this.range.start instanceof Date && this.range.end == undefined) {
       let minDate = new Date(this.range.start.valueOf());
-      minDate.setDate(minDate.getDate() + 2);
+      minDate.setDate(minDate.getDate() + 0);
       this.disabledDates = this.getDates(this.range.start, minDate);
     }
     const datesBetween = this.getDates(this.range.start, this.range.end);
-    if (datesBetween.length < 4) {
-      delete this.range.end;
+    if (datesBetween.length < 0) {
+      delete this.range.end; 
     }
     if (this.range.start instanceof Date && (this.range.end instanceof Date && this.range.end != undefined)) {
       this.disabledDates = [];
       this.disabled = false;
       datesBetween.forEach(date => {
-        for(let i =0; i<this.disabledResa.length; i++){
-          if(date.valueOf() == this.disabledResa[i].valueOf()){
+        for (let i = 0; i < this.disabledResa.length; i++) {
+          if (date.valueOf() == this.disabledResa[i].valueOf()) {
             delete this.range.start;
             delete this.range.end;
             this.error = "Les dates choisies sont incorrects, elles comportent des dates déja réservées.";
@@ -98,14 +99,14 @@ export class CalendarComponent implements OnInit {
   };
 
 
-  isAvailableDate(date){
+  isAvailableDate(date) {
     for (let i = 1; i < this.disabledDates.length; i++) {
       if (date.getDate() == this.disabledDates[i].getDate()) {
         return false;
       }
     }
-    for(let i= 0; i< this.disabledResa.length; i++){
-      if(date.valueOf() == this.disabledResa[i].valueOf()){
+    for (let i = 0; i < this.disabledResa.length; i++) {
+      if (date.valueOf() == this.disabledResa[i].valueOf()) {
         return false;
       }
     }
@@ -114,7 +115,7 @@ export class CalendarComponent implements OnInit {
 
 
 
-  getAvailabilities(){
+  getAvailabilities() {
     this.reservationService.getAvailabilities().subscribe((availabilities) => {
       //this.availabilities = availabilities;
       this.disabledResa = [];
@@ -129,17 +130,17 @@ export class CalendarComponent implements OnInit {
 
 
 
-  submit(){
+  submit() {
     let reservation = {
-      range : this.range,
-      nb : this.vacanciers
-
+      range: this.range,
+      adults: this.adults,
+      children : this.children
     }
     this.reservationService.saveReservationDetails(reservation);
-    if(this.embbeded){
+    if (this.embbeded) {
       this.close.emit('close');
-    }else{
-      window.open(`${environment.homeUrl}`, '_blank'); 
+    } else {
+      window.open(`${environment.homeUrl}`, '_blank');
     }
   }
 

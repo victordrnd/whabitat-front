@@ -16,24 +16,41 @@
         <nb-card>
             <nb-card-body class="example-items-rows w-100">
                 <div class="row">
-                    <div class="col-12">
-                        <nb-select placeholder="Nombre de vacanciers" fullWidth="true" size="small"
-                            [(selected)]="vacanciers">
-                            <nb-option value="1">1 personnes</nb-option>
-                            <nb-option value="2">2 personnes</nb-option>
-                            <nb-option value="3">3 personnes</nb-option>
-                            <nb-option value="4">4 personnes</nb-option>
-                            <nb-option value="5">5 personnes</nb-option>
-                            <nb-option value="6">6 personnes</nb-option>
-                            <nb-option value="7">7 personnes</nb-option>
-                            <nb-option value="8">8 personnes</nb-option>
-                            <nb-option value="9">9 personnes</nb-option>
-                            <nb-option value="10">10 personnes</nb-option>
-                            <nb-option value="11">11 personnes</nb-option>
+                    <div class="col-6">
+                        <nb-select placeholder="Nombre d'adultes" fullWidth="true" size="small"
+                            [(selected)]="adults">
+                            <nb-option value="1">1 adulte</nb-option>
+                            <nb-option value="2">2 adultes</nb-option>
+                            <nb-option value="3">3 adultes</nb-option>
+                            <nb-option value="4">4 adultes</nb-option>
+                            <nb-option value="5">5 adultes</nb-option>
+                            <nb-option value="6">6 adultes</nb-option>
+                            <nb-option value="7">7 adultes</nb-option>
+                            <nb-option value="8">8 adultes</nb-option>
+                            <nb-option value="9">9 adultes</nb-option>
+                            <nb-option value="10">10 adultes</nb-option>
+                            <nb-option value="11">11 adultes</nb-option>
                         </nb-select>
                     </div>
+                    <div class="col-6">
+                        <nb-select placeholder="Nombre d'enfants" [disabled]="adults == 0" fullWidth="true" size="small"
+                            [(selected)]="children">
+                            <nb-option value="0" *ngIf="adults <= 11">0 enfant</nb-option>
+                            <nb-option value="1" *ngIf="adults <= 10">1 enfant</nb-option>
+                            <nb-option value="2" *ngIf="adults <= 9">2 enfants</nb-option>
+                            <nb-option value="3" *ngIf="adults <= 8">3 enfants</nb-option>
+                            <nb-option value="4" *ngIf="adults <= 7">4 enfants</nb-option>
+                            <nb-option value="5" *ngIf="adults <= 6">5 enfants</nb-option>
+                            <nb-option value="6" *ngIf="adults <= 5">6 enfants</nb-option>
+                            <nb-option value="7" *ngIf="adults <= 4">7 enfants</nb-option>
+                            <nb-option value="8" *ngIf="adults <= 3">8 enfants</nb-option>
+                            <nb-option value="9" *ngIf="adults <= 2">9 enfants</nb-option>
+                            <nb-option value="10" *ngIf="adults == 1">10 enfants</nb-option>
+                        </nb-select>
+                    </div>
+
                     <div class="col mt-3">
-                        <button class="float-right" nbButton [disabled]="disabled" *ngIf="vacanciers > 0"
+                        <button class="float-right" nbButton [disabled]="disabled" *ngIf="adults > 0"
                             (click)="submit()">Réserver</button>
                     </div>
                 </div>

@@ -20,6 +20,7 @@ export class PaymentsComponent implements OnInit {
   cardElement;
   disabled = true;
   reservation;
+  price;
 
 
   ngOnInit() {
@@ -43,7 +44,8 @@ export class PaymentsComponent implements OnInit {
     //Create payment intent
     this.reservation = JSON.parse(this.reservationService.getCurrentReservationDetails());
     this.paymentService.createPaymentIntent(this.reservation).toPromise().then((intent) => {
-      this.intent = intent
+      this.intent = intent.intent;
+      this.price = intent.amount;
       this.cardElement = elements.create('card', { style: style });
       this.cardElement.mount('#stripe-card');
       this.cardElement.addEventListener('change', (res) => {
@@ -59,11 +61,7 @@ export class PaymentsComponent implements OnInit {
       payment_method : {
         card : this.cardElement
       }
-    });
-    // const { paymentIntent, error } = await this.stripe.handleCardPayment(this.intent.client_secret, this.cardElement, {
-
-    // });
-    if (!error) {
+    }).then(async res => {
       let obj = {
         reservation: this.reservation,
         intent: this.intent
@@ -71,6 +69,6 @@ export class PaymentsComponent implements OnInit {
       await this.reservationService.confirmReservation(obj).toPromise();
       localStorage.removeItem('reservationDetail');
       this.router.navigate(['/payments/success']);
-    }
+    });
   }
 }

@@ -14,7 +14,7 @@
                                     {{reservation?.arrival_date | date}}</p>
                                 <p><i class="feather icon-calendar"></i> Date de départ :
                                     {{reservation?.departure_date | date}}</p>
-                                <p><i class="feather icon-users"></i> Nombre de vacanciers : {{reservation?.vacanciers}}
+                                <p><i class="feather icon-users"></i> Nombre de vacanciers : {{reservation?.adults + reservation?.children}}
                                 </p>
                             </div>
                         </div>
@@ -23,14 +23,15 @@
                             <h6>Adresse :</h6>
                             <div class="m-4">
                                 <p>Ville : Carnetin</p>
-                                <p>Adresse : </p>
+                                <p>Code postal : 77400</p>
+                                <p>Adresse : 8, rue de la croix</p>
                                 <p>Pays: France</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn btn-primary rounded-0 p-2">Afficher mes réservations</button>
+                <button class="btn btn-primary rounded-0 p-2" [routerLink]="['/dashboard']">Afficher mes réservations</button>
             </div>
         </div>
     </div>
