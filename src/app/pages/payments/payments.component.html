@@ -22,7 +22,8 @@
                         </div>
                     </div>
                     <div class="px-5 mt-4">
-                        <nb-checkbox (valueChange)="read = !read;">J'ai lu et j'accepte <a href="../../../assets/cgv.pdf" target="_blank">les conditions générales de vente.</a></nb-checkbox>
+                        <p class="text-small">L'empreinte bancaire sera enregistrée auprès de notre prestataire Stripe. Le paiement ne sera enregistré que 7 jours avant votre arrivée, pour toutes réservations à 7 jours et moins, le prélèvement sera immédiat.</p>
+                        <nb-checkbox (valueChange)="checkboxChange()" [status]="checkStatus">J'ai lu et j'accepte <a href="../../../assets/cgv.pdf" target="_blank">les conditions générales de vente.</a></nb-checkbox>
                     </div>
                     <button class="btn btn-primary rounded-0 text-bold py-3 mt-3" [attr.data-secret]="intent?.client_secret" [disabled]="disabled" (click)="payOrder()">Confirmer & payer</button>
                 </div>

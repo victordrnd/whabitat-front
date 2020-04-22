@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input, Output } from '@angular/core';
-import { NbCalendarRangeComponent, NbButtonComponent, NbCardComponent, NbCardHeaderComponent, NbCardBodyComponent, NbSelectComponent } from '@nebular/theme';
+import { NbCalendarRangeComponent, NbButtonComponent, NbCardComponent, NbCardHeaderComponent, NbCardBodyComponent, NbSelectComponent, NbCalendarRange } from '@nebular/theme';
 import { ParamsService } from 'src/app/core/params.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';

@@ -15,6 +15,7 @@
         </nb-calendar-range>
         <nb-card>
             <nb-card-body class="example-items-rows w-100">
+                <p class="my-4 text-center w-100">{{ range?.start | date }} - {{ range?.end | date }}</p> 
                 <div class="row">
                     <div class="col-6">
                         <nb-select placeholder="Nombre d'adultes" fullWidth="true" size="small"
@@ -33,7 +34,7 @@
                         </nb-select>
                     </div>
                     <div class="col-6">
-                        <nb-select placeholder="Nombre d'enfants" [disabled]="adults == 0" fullWidth="true" size="small"
+                        <nb-select placeholder="Nombre d'enfants ( - de 18 ans)" [disabled]="adults == 0" fullWidth="true" size="small"
                             [(selected)]="children">
                             <nb-option value="0" *ngIf="adults <= 11">0 enfant</nb-option>
                             <nb-option value="1" *ngIf="adults <= 10">1 enfant</nb-option>

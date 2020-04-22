@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/core/payment.service';
 import { ReservationService } from 'src/app/core/reservation.service';
 import { Router } from '@angular/router'
@@ -23,6 +22,7 @@ export class PaymentsComponent implements OnInit {
   reservation;
   price;
   read = false;
+  checkStatus = "info";
 
 
   ngOnInit() {
@@ -61,6 +61,7 @@ export class PaymentsComponent implements OnInit {
   async payOrder() {
     if(!this.read){
       this.toastrService.show('Vous devez accepter les conditions générales de vente afin de continuer', "Informations", {status : "basic"});
+      this.checkStatus = "danger"
       return;
     }
     const {paymentIntent, error} = this.stripe.confirmCardSetup(this.intent.client_secret, {
@@ -76,5 +77,10 @@ export class PaymentsComponent implements OnInit {
       localStorage.removeItem('reservationDetail');
       this.router.navigate(['/payments/success']);
     });
+  }
+
+  checkboxChange(){
+    this.read = ! this.read;
+    this.checkStatus = "info";
   }
 }

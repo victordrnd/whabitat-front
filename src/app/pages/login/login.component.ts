@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/user.service';
-import { ToastrService } from 'ngx-toastr';
+import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 import { ReservationService } from 'src/app/core/reservation.service';
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private router : Router,
     private fb : FormBuilder,
     private userService : UserService,
-    private toastr: ToastrService,
+    private toastrService: NbToastrService,
     private reservationService : ReservationService
     ) { }
 
@@ -41,9 +41,7 @@ export class LoginComponent implements OnInit {
       }
     },
     err => {
-      this.toastr.error('Les identifiants saisis sont invalides', 'Identifiants invalides', {
-        progressBar : true
-      }) 
+      this.toastrService.show("Les identifiants saisis sont invalides", "Identifiants invalides", {status : "danger"}); 
     })
 
   } 
