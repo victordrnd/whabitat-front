@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/core/payment.service';
 import { ReservationService } from 'src/app/core/reservation.service';
 import { Router } from '@angular/router'
+import { NbToastrService } from '@nebular/theme';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router'
 })
 export class PaymentsComponent implements OnInit {
 
-  constructor(private toastr: ToastrService,
+  constructor(private toastrService: NbToastrService,
     private paymentService: PaymentService,
     private reservationService: ReservationService,
     private router: Router) { }
@@ -21,6 +22,7 @@ export class PaymentsComponent implements OnInit {
   disabled = true;
   reservation;
   price;
+  read = false;
 
 
   ngOnInit() {
@@ -57,6 +59,10 @@ export class PaymentsComponent implements OnInit {
 
 
   async payOrder() {
+    if(!this.read){
+      this.toastrService.show('Vous devez accepter les conditions générales de vente afin de continuer', "Informations", {status : "basic"});
+      return;
+    }
     const {paymentIntent, error} = this.stripe.confirmCardSetup(this.intent.client_secret, {
       payment_method : {
         card : this.cardElement

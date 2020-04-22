@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PaymentsComponent } from './payments/payments.component';
 import { SuccessComponent } from './payments/success/success.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {NbMenuModule, NbDialogModule} from '@nebular/theme';
+import {NbMenuModule, NbDialogModule, NbCheckboxModule, NbToastrModule} from '@nebular/theme';
 import { NbThemeModule, NbLayoutModule, NbButtonModule, NbCardModule } from '@nebular/theme';
 import { RefundModalComponent } from './dashboard/refund-modal/refund-modal.component';
 
@@ -29,6 +29,8 @@ import { RefundModalComponent } from './dashboard/refund-modal/refund-modal.comp
     NbLayoutModule,
     NbButtonModule,
     NbCardModule,
+    NbCheckboxModule,
+    NbToastrModule.forRoot(),
     NbDialogModule.forRoot()
   ],
   entryComponents: [
