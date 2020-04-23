@@ -4,6 +4,7 @@ import { PaymentService } from 'src/app/core/payment.service';
 import { ReservationService } from 'src/app/core/reservation.service';
 import { Router } from '@angular/router'
 import { NbToastrService } from '@nebular/theme';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -14,7 +15,8 @@ export class PaymentsComponent implements OnInit {
   constructor(private toastrService: NbToastrService,
     private paymentService: PaymentService,
     private reservationService: ReservationService,
-    private router: Router) { }
+    private router: Router,
+    private spinner: NgxSpinnerService) { }
   stripe;
   intent;
   cardElement;
@@ -64,6 +66,7 @@ export class PaymentsComponent implements OnInit {
       this.checkStatus = "danger"
       return;
     }
+    this.spinner.show(); 
     const {paymentIntent, error} = this.stripe.confirmCardSetup(this.intent.client_secret, {
       payment_method : {
         card : this.cardElement
@@ -75,6 +78,7 @@ export class PaymentsComponent implements OnInit {
       };
       await this.reservationService.confirmReservation(obj).toPromise();
       localStorage.removeItem('reservationDetail');
+      this.spinner.hide();
       this.router.navigate(['/payments/success']);
     });
   }

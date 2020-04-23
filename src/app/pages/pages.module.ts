@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {NbMenuModule, NbDialogModule, NbCheckboxModule, NbToastrModule} from '@nebular/theme';
 import { NbThemeModule, NbLayoutModule, NbButtonModule, NbCardModule } from '@nebular/theme';
 import { RefundModalComponent } from './dashboard/refund-modal/refund-modal.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [LoginComponent, ReservationSummaryComponent, ReservationComponent, SignupComponent, PaymentsComponent, SuccessComponent, DashboardComponent, RefundModalComponent],
@@ -30,6 +31,7 @@ import { RefundModalComponent } from './dashboard/refund-modal/refund-modal.comp
     NbButtonModule,
     NbCardModule,
     NbCheckboxModule,
+    NgxSpinnerModule,
     NbToastrModule.forRoot(),
     NbDialogModule.forRoot()
   ],
